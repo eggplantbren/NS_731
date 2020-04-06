@@ -1,5 +1,5 @@
 # Import the model and some functions
-source("model.R")
+source("ns-model.R")
 source("utils.R")
 
 # Number of particles
