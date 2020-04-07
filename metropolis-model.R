@@ -8,9 +8,9 @@ names = c("mu", "sigma")
 # Step sizes for proposals
 step_sizes = c(1, 1)
 
-# If these are nonzero, they set the scale of a lognormal
+# If these are nonzero, they set the scale of a log-t
 # distribution for the step sizes.
-sig_step_sizes = c(3, 3)
+scale_step_sizes = c(3, 3)
 
 # A dataset
 data = list(x = c(0.044103595329532, -0.922186227194728, 0.0960010565013454, 
@@ -50,7 +50,7 @@ generate_proposal = function(params)
     k = sample(1:length(params), 1)
 
     # Change it
-    step_size = step_sizes[k]*exp(sig_step_sizes[k]*rnorm(1))
+    step_size = step_sizes[k]*exp(scale_step_sizes[k]*rt(1, df=2))
     params[k] = params[k] + step_size*rnorm(1)
 
     # Return modified vector
