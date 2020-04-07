@@ -122,6 +122,8 @@ while(TRUE)
 
         # Get plot window ready
         par(mfrow=c(2,1))
+        par(mar=c(6,6,4,4))
+
         plot(logxs, keep[1:iteration, dim(keep)[2]],
              type="b", xlab="ln(X)", ylab="ln(L)", ylim=ylim,
              cex.lab=2, cex.axis=2)
