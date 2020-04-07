@@ -103,7 +103,7 @@ while(TRUE)
     # Make a plot
     if(iteration %% num_particles == 0)
     {
-        png(filename="ns-progress-plot.png", width=800, height=600)
+        png(filename="ns-progress-plot.png", width=1000, height=1000)
 
         keep = as.matrix(read.csv("ns-output.csv"))
 
@@ -123,9 +123,11 @@ while(TRUE)
         # Get plot window ready
         par(mfrow=c(2,1))
         plot(logxs, keep[1:iteration, dim(keep)[2]],
-             type="b", xlab="ln(X)", ylab="ln(L)", ylim=ylim)
+             type="b", xlab="ln(X)", ylab="ln(L)", ylim=ylim,
+             cex.lab=2, cex.axis=2)
         plot(logxs, exp(logws),
-             type="b", xlab="ln(X)", ylab="Posterior weight")
+             type="b", xlab="ln(X)", ylab="Posterior weight", cex.lab=2,
+             cex.axis=2)
 
         dev.off()
     }
