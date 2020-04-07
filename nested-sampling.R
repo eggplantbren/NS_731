@@ -32,7 +32,7 @@ header = ""
 for(i in 1:num_params)
     header = paste(header, names[i], ",", sep="")
 header = paste(header, "log_likelihood", sep="")
-fileConn = file("output.csv", open="w")
+fileConn = file("ns-output.csv", open="w")
 writeLines(header, fileConn)
 close(fileConn)
 
@@ -47,7 +47,7 @@ while(TRUE)
     worst = which.min(log_likelihoods)
 
     # Save its details
-    fileConn = file("output.csv", open="a")
+    fileConn = file("ns-output.csv", open="a")
     line = ""
     params = us_to_params(particles[worst, ])
     for(i in 1:num_params)
@@ -103,9 +103,9 @@ while(TRUE)
     # Make a plot
     if(iteration %% num_particles == 0)
     {
-        png(filename="progress_plot.png", width=800, height=600)
+        png(filename="ns-progress-plot.png", width=800, height=600)
 
-        keep = as.matrix(read.csv("output.csv"))
+        keep = as.matrix(read.csv("ns-output.csv"))
 
         logxs = -(1:iteration)/num_particles
         logws = logxs + keep[1:iteration, dim(keep)[2]]
@@ -134,7 +134,7 @@ while(TRUE)
 } # End main NS loop
 
 # Load output
-keep = as.matrix(read.csv("output.csv"))
+keep = as.matrix(read.csv("ns-output.csv"))
 
 # Prior weights
 logws = -(1:iteration)/num_particles
@@ -191,9 +191,9 @@ while(TRUE)
 colnames(posterior_samples) = colnames(keep)
 
 # Save the output. Just posterior
-write.table(posterior_samples, file="posterior_samples.csv",
-            sep=",", row.names=FALSE, col.names=TRUE)
-cat("Posterior samples saved in posterior_samples.csv.\n")
+write.table(posterior_samples, file="ns-posterior-samples.csv",
+            sep=",", row.names=FALSE, col.names=TRUE, quote=FALSE)
+cat("Posterior samples saved in ns-posterior-samples.csv.\n")
 
 
 

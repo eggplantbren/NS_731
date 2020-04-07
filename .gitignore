@@ -1,4 +1,4 @@
-output.csv
-posterior_samples.csv
-progress_plot.png
+ns-output.csv
+ns-posterior-samples.csv
+ns-progress-plot.png
 
