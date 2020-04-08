@@ -1,4 +1,5 @@
 metropolis-output.csv
+model_temp.txt
 ns-output.csv
 ns-posterior-samples.csv
 ns-progress-plot.png
