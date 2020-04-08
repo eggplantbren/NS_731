@@ -26,9 +26,6 @@ steps = 100000
 # Thinning?
 thin = 10
 
-# Random number seed
-seed = 42
-
 # Import the rjags library
 library("rjags")
 
