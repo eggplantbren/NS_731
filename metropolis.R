@@ -2,10 +2,10 @@
 source("metropolis-model.R")
 
 # Number of iterations to do
-steps = 1000000
+steps = 100000
 
 # Thinning
-thin = 100
+thin = 10
 
 # Initialise the particle somewhere
 particle = starting_point
