@@ -35,12 +35,13 @@ for(iteration in 1:steps)
 
     # Compute acceptance probability
     log_alpha = proposal_logp - logp
+    if(is.nan(log_alpha))
+        log_alpha = -Inf
     if(log_alpha >= 0.0)
         alpha = 1.0
     else
         alpha = exp(log_alpha)
-    if(is.nan(alpha))
-        alpha = 0.0
+
 
     # Make accept/reject decision
     if(runif(1) <= alpha)
