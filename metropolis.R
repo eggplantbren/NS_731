@@ -2,10 +2,10 @@
 source("metropolis-model.R")
 
 # Number of iterations to do
-steps = 100000
+steps = 1000000
 
 # Thinning
-thin = 10
+thin = 100
 
 # Initialise the particle somewhere
 particle = starting_point
@@ -39,6 +39,8 @@ for(iteration in 1:steps)
         alpha = 1.0
     else
         alpha = exp(log_alpha)
+    if(is.nan(alpha))
+        alpha = 0.0
 
     # Make accept/reject decision
     if(runif(1) <= alpha)
