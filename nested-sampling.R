@@ -119,6 +119,8 @@ while(TRUE)
             ylim[1] = temp[floor(0.1*length(temp))]
             ylim[2] = temp[length(temp)]
         }
+        if(any(is.infinite(ylim)))
+            ylim=c(0, 1)
 
         # Get plot window ready
         par(mfrow=c(2,1))

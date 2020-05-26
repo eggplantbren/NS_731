@@ -37,8 +37,8 @@ us_to_params = function(us)
 # log likelihood.
 log_likelihood = function(params)
 {
-    line = params["lambda0"] + params["slope"]*data$t
-    logL = sum(dnorm(data$y, line, log=TRUE))
+    line = params["lambda0"]*exp(params["slope"]*data$t)
+    logL = sum(dpois(data$y, line, log=TRUE))
     return(logL)
 }
 
