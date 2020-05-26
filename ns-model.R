@@ -3,12 +3,13 @@ num_params = 2
 
 # Define the names of the parameters.
 # If you can't be bothered, use names=rep(NA, num_params).
-names = c("mu", "sigma")
+names = c("lambda0", "slope")
 
 # A dataset
-data = list(x = c(0.044103595329532, -0.922186227194728, 0.0960010565013454, 
--1.12828522333698, 1.36291783960003, -2.23065969145022, -0.93027082294735, 
--2.07175801570109, 1.20069146950599, 3.3937627148158), N = 10)
+# This could easily be loaded from an external file
+data = list(t=c(1,   2,  3,  4,  5,  6,  7,  8,  9, 10)-1,
+            y=c(21, 19, 23, 40, 27, 22, 31, 39, 28, 42),
+            N=10)
 
 # Function that takes a vector of Uniform(0, 1) variables
 # and returns a vector of the actual parameters. This
@@ -23,11 +24,11 @@ us_to_params = function(us)
 
     #### You'll only need to edit this function below this line ####
 
-    # A broad normal prior for mu
-    params["mu"] = qnorm(us[1], mean=0, sd=1000)
+    # A lognormal prior for the first parameter
+    params["lambda0"] = exp(qnorm(us[1], 0, 10))
 
-    # A broad lognormal prior for sigma
-    params["sigma"] = exp(qnorm(us[2], mean=0, sd=5))
+    # A Normal(0, 1) prior for the second parameter
+    params["slope"] = qnorm(us[2], 0, 1)
 
     return(params)
 }
@@ -36,7 +37,8 @@ us_to_params = function(us)
 # log likelihood.
 log_likelihood = function(params)
 {
-    logL = sum(dnorm(data$x, mean=params["mu"], sd=params["sigma"], log=TRUE))
+    line = params["lambda0"] + params["slope"]*data$t
+    logL = sum(dnorm(data$y, line, log=TRUE))
     return(logL)
 }
 
