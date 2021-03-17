@@ -2,8 +2,8 @@
 num_params = 2
 
 # Define the names of the parameters.
-# If you can't be bothered, use names=rep(NA, num_params).
-names = c("lambda0", "slope")
+# If you can't be bothered, use parameter_names=rep(NA, num_params).
+parameter_names = c("lambda0", "slope")
 
 # A dataset
 # This could easily be loaded from an external file
@@ -20,7 +20,7 @@ us_to_params = function(us)
     params = rep(NA, num_params)
 
     # Apply the names
-    names(params) = names
+    names(params) = parameter_names
 
     #### You'll only need to edit this function below this line ####
 

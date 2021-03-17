@@ -14,7 +14,7 @@ logp = log_prob(particle)
 # Start the output file
 header = ""
 for(i in 1:num_params)
-    header = paste(header, names[i], ",", sep="")
+    header = paste(header, parameter_names[i], ",", sep="")
 header = paste(header, "log_prob", sep="")
 fileConn = file("metropolis-output.csv", open="w")
 writeLines(header, fileConn)

@@ -2,8 +2,8 @@
 num_params = 2
 
 # Define the names of the parameters.
-# If you can't be bothered, use names=rep(NA, num_params).
-names = c("mu", "sigma")
+# If you can't be bothered, use parameter_names=rep(NA, num_params).
+parameter_names = c("mu", "sigma")
 
 # Step sizes for proposals
 step_sizes = c(1, 1)
@@ -19,7 +19,7 @@ data = list(x = c(0.044103595329532, -0.922186227194728, 0.0960010565013454,
 
 # A sensible starting point
 starting_point = c(0.0, 1.0)
-names(starting_point) = names
+names(starting_point) = parameter_names
 
 # Function that takes a vector of parameters and returns the log posterior,
 # up to a normalising constant.
