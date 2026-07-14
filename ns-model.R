@@ -3,6 +3,9 @@ library(compiler)
 # Define the number of parameters
 num_params = 2
 
+# Parameter names
+parameter_names = c("lambda0", "slope")
+
 # A dataset
 # This could easily be loaded from an external file
 data = list(t=c(1,   2,  3,  4,  5,  6,  7,  8,  9, 10)-1,
@@ -18,8 +21,9 @@ us_to_params = cmpfun(function(us)
 
     # A lognormal prior for the first parameter
     # and a normal prior for the second parameter
-    params = c(lambda0=exp(qnorm(us[1], 0, 10)),
-               slope=qnorm(us[2], 0, 1))
+    params = c(exp(qnorm(us[1], 0, 10)),
+               qnorm(us[2], 0, 1))
+    names(params) = parameter_names
 
     return(params)
 })
