@@ -34,7 +34,6 @@ for(i in 1:num_params)
 header = paste(header, "log_likelihood", sep="")
 fileConn = file("ns-output.csv", open="w")
 writeLines(header, fileConn)
-close(fileConn)
 
 # Main NS loop
 iteration = 1
@@ -47,14 +46,13 @@ while(TRUE)
     worst = which.min(log_likelihoods)
 
     # Save its details
-    fileConn = file("ns-output.csv", open="a")
+
     line = ""
     params = us_to_params(particles[worst, ])
     for(i in 1:num_params)
         line = paste(line, params[i], ",", sep="")
     line = paste(line, log_likelihoods[worst], sep="")
     writeLines(line, fileConn)
-    close(fileConn)
 
     threshold = log_likelihoods[worst]
     ln_p = log_likelihoods[worst] - iteration/num_particles
@@ -105,6 +103,7 @@ while(TRUE)
     {
         png(filename="ns-progress-plot.png", width=1000, height=1000)
 
+        flush(fileConn)
         keep = as.matrix(read.csv("ns-output.csv"))
 
         logxs = -(1:iteration)/num_particles
@@ -138,6 +137,9 @@ while(TRUE)
 
     iteration = iteration + 1
 } # End main NS loop
+
+# Close file
+close(fileConn)
 
 # Load output
 keep = as.matrix(read.csv("ns-output.csv"))
