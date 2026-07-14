@@ -93,7 +93,7 @@ while(TRUE)
     # Evolve within likelihood constraint using Metropolis
     newpoint = do_mcmc(particles[worst, ], log_likelihoods[worst], threshold)
     particles[worst, ] = newpoint$particle
-    log_likelihoods[worst] = newpoint$log_likelihood
+    log_likelihoods[worst] = newpoint$logl
     accepted = newpoint$accepted
 
     cat("done. Accepted ", accepted, "/", mcmc_steps, " steps.\n", sep="")

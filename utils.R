@@ -1,7 +1,7 @@
 library(compiler)
 
 # Function that does MCMC
-do_mcmc = cmpfun(function(particle, log_likelihood, threshold)
+do_mcmc = cmpfun(function(particle, logl, threshold)
 {
     accepted = 0
 
@@ -22,18 +22,18 @@ do_mcmc = cmpfun(function(particle, log_likelihood, threshold)
         }
 
         # Accept the proposal if the new particle is above the threshold
-        logL_new = log_likelihood(us_to_params(new))
+        logl_new = log_likelihood(us_to_params(new))
 
-        if(logL_new >= threshold)
+        if(logl_new >= threshold)
         {
             particle = new
-            log_likelihood = logL_new
+            logl = logl_new
             accepted = accepted + 1
         }
     }
 
     return(list(particle=particle,
-                log_likelihood=log_likelihood, accepted=accepted))
+                logl=logl, accepted=accepted))
 })
 
 
