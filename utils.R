@@ -15,7 +15,7 @@ do_mcmc = cmpfun(function(particle, logl, threshold)
             num = floor(num_params**runif(1))
         for(k in 1:num)
         {
-            which = sample(1:num_params, 1)
+            which = sample.int(num_params, 1)
             scale = 10.0**(1.0 - 3*abs(rt(1, df=2)))
             new[which] = new[which] + rnorm(1, sd=scale)
             new[which] = new[which] %% 1.0
