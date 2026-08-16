@@ -20,9 +20,6 @@ fileConn = file("metropolis-output.csv", open="w")
 writeLines(header, fileConn)
 close(fileConn)
 
-# Storage of results for trace plot
-keep = rep(NA, floor(steps/thin))
-
 # Count the number of accepted proposals
 accepted = 0
 
