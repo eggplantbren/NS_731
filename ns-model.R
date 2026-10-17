@@ -1,5 +1,3 @@
-library(compiler)
-
 # Define the number of parameters
 num_params = 2
 
@@ -15,7 +13,7 @@ data = list(t=c(1,   2,  3,  4,  5,  6,  7,  8,  9, 10)-1,
 # Function that takes a vector of Uniform(0, 1) variables
 # and returns a vector of the actual parameters. This
 # function implicitly defines the prior for the parameters.
-us_to_params = cmpfun(function(us)
+prior_transform = function(us)
 {
     #### You'll only need to edit this function below this line ####
 
@@ -26,14 +24,14 @@ us_to_params = cmpfun(function(us)
     names(params) = parameter_names
 
     return(params)
-})
+}
 
 # Function that takes a vector of parameters and returns the
 # log likelihood.
-log_likelihood = cmpfun(function(params)
+log_likelihood = function(params)
 {
     line = params["lambda0"]*exp(params["slope"]*data$t)
     logL = sum(dpois(data$y, line, log=TRUE))
     return(logL)
-})
+}
 

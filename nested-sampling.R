@@ -21,7 +21,7 @@ log_likelihoods = rep(NA, num_particles)
 for(i in 1:num_particles)
 {
     particles[i, ] = runif(num_params)
-    log_likelihoods[i] = log_likelihood(us_to_params(particles[i, ]))
+    log_likelihoods[i] = log_likelihood(prior_transform(particles[i, ]))
 }
 
 # Keep track of best posterior weight seen so far (arbitrary normalisation)
@@ -48,7 +48,7 @@ while(TRUE)
     # Save its details
 
     line = ""
-    params = us_to_params(particles[worst, ])
+    params = prior_transform(particles[worst, ])
     for(i in 1:num_params)
         line = paste(line, params[i], ",", sep="")
     line = paste(line, log_likelihoods[worst], sep="")

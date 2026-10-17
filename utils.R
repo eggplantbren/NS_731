@@ -22,7 +22,7 @@ do_mcmc = cmpfun(function(particle, logl, threshold)
         }
 
         # Accept the proposal if the new particle is above the threshold
-        logl_new = log_likelihood(us_to_params(new))
+        logl_new = log_likelihood(prior_transform(new))
 
         if(logl_new >= threshold)
         {
