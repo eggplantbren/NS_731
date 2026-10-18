@@ -1,7 +1,5 @@
-library(compiler)
-
 # Function that does MCMC
-do_mcmc = cmpfun(function(particle, logl, threshold)
+do_mcmc = function(particle, logl, threshold)
 {
     accepted = 0
 
@@ -34,7 +32,7 @@ do_mcmc = cmpfun(function(particle, logl, threshold)
 
     return(list(particle=particle,
                 logl=logl, accepted=accepted))
-})
+}
 
 
 # Useful function
